@@ -1,5 +1,5 @@
 {
-    "name": "EditorAssistant",
+    "name": "EditorAssistant.Editor",
     "rootNamespace": "EditorAssistant",
     "references": [],
     "includePlatforms": [
