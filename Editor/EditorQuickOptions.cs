@@ -1,23 +1,26 @@
 using UnityEditor;
 using UnityEngine;
 
-public class EditorQuickOptions : MonoBehaviour
+namespace EditorAssistant
 {
-    [MenuItem("Tools/Toggle Domain and Scene Reloading")]
-    public static void DisableReloading()
+    internal class EditorQuickOptions : MonoBehaviour
     {
-        var enterPlayModeOption = EditorSettings.enterPlayModeOptions;
-        if (enterPlayModeOption == EnterPlayModeOptions.None)
+        [MenuItem("Tools/Toggle Domain and Scene Reloading")]
+        public static void DisableReloading()
         {
-            EditorSettings.enterPlayModeOptions = EnterPlayModeOptions.DisableDomainReload | EnterPlayModeOptions.DisableSceneReload;
-            Debug.Log("Enter Play Mode Settings Updated: Domain/Scene Reloading Disabled");
+            var enterPlayModeOption = EditorSettings.enterPlayModeOptions;
+            if (enterPlayModeOption == EnterPlayModeOptions.None)
+            {
+                EditorSettings.enterPlayModeOptions = EnterPlayModeOptions.DisableDomainReload | EnterPlayModeOptions.DisableSceneReload;
+                Debug.Log("Enter Play Mode Settings Updated: Domain/Scene Reloading Disabled");
+            }
+            else
+            {
+                EditorSettings.enterPlayModeOptions = EnterPlayModeOptions.None;
+                Debug.Log("Enter Play Mode Settings Updated: Domain/Scene Reloading Enabled");
+            }
+            AssetDatabase.SaveAssets();
         }
-        else
-        {
-            EditorSettings.enterPlayModeOptions = EnterPlayModeOptions.None;
-            Debug.Log("Enter Play Mode Settings Updated: Domain/Scene Reloading Enabled");
-        }
-        AssetDatabase.SaveAssets();
-    }
 
+    }
 }

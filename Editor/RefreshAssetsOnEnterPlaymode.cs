@@ -1,27 +1,30 @@
 using UnityEditor;
-
-/// <summary>
-///     If Preferences => Asset Pipeline => Auto Refresh is disabled, will call AssetDatabase.Refresh() before
-///     entering Playmode to ensure Playmode always uses the up-to-date versions of assets and scripts.
-/// </summary>
-/// <remarks>If no assets have changed this script will not slow down entering playmode.</remarks>
-internal static class RefreshAssetsOnEnterPlaymode
+namespace EditorAssistant
 {
-    private const string AutoRefreshKey = "kAutoRefreshMode";
-    private static bool IsAutoRefreshDisabled => EditorPrefs.GetInt(AutoRefreshKey, -1) == 0;
-
-    [InitializeOnLoadMethod]
-    private static void InitOnLoad()
+    /// <summary>
+    ///     If Preferences => Asset Pipeline => Auto Refresh is disabled, will call AssetDatabase.Refresh() before
+    ///     entering Playmode to ensure Playmode always uses the up-to-date versions of assets and scripts.
+    /// </summary>
+    /// <remarks>If no assets have changed this script will not slow down entering playmode.</remarks>
+    internal static class RefreshAssetsOnEnterPlaymode
     {
-        EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
-        EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
-    }
+        private const string AutoRefreshKey = "kAutoRefreshMode";
+        private static bool IsAutoRefreshDisabled => EditorPrefs.GetInt(AutoRefreshKey, -1) == 0;
 
-    private static void OnPlayModeStateChanged(PlayModeStateChange state)
-    {
-        if (state == PlayModeStateChange.ExitingEditMode && IsAutoRefreshDisabled)
-            AssetDatabase.Refresh();
-            
-    }
+        [InitializeOnLoadMethod]
+        private static void InitOnLoad()
+        {
+            EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+            EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+        }
 
+        private static void OnPlayModeStateChanged(PlayModeStateChange state)
+        {
+            if (state == PlayModeStateChange.ExitingEditMode && IsAutoRefreshDisabled)
+            {
+                AssetDatabase.Refresh();
+            }
+        }
+
+    }
 }

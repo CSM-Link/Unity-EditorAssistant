@@ -4,9 +4,9 @@
   "displayName": "Editor Assistant",
   "description": "custom non-destructive/invasive unity editor tools to improve workflow",
   "unity": "6000.0",
-  "documentationUrl": "",
+  "documentationUrl": "https://github.com/CSM-Link/Unity-EditorAssistant",
   "changelogUrl": "",
-  "licensesUrl": "",
+  "licensesUrl": "https://github.com/CSM-Link/Unity-EditorAssistant/blob/main/LICENSE",
   "keywords": [
     "Asset",
     "Refresh"
